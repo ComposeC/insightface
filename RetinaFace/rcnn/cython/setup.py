@@ -63,6 +63,16 @@ try:
 except EnvironmentError:
     CUDA = None
 
+### add 05.10
+try:
+    from setuptools import setup
+    from setuptools import Extension
+except ImportError:
+    from distutils.core import setup
+    from distutils.extension import Extension
+from Cython.Distutils import build_ext
+import numpy as np
+### end add
 
 # Obtain the numpy include directory.  This logic works across numpy versions.
 try:
@@ -120,19 +130,19 @@ ext_modules = [
     Extension(
         "bbox",
         ["bbox.pyx"],
-        extra_compile_args={'gcc': ["-Wno-cpp", "-Wno-unused-function"]},
+        extra_compile_args=["/openmp"], ### change 05.10 'gcc': ["-Wno-cpp", "-Wno-unused-function"
         include_dirs=[numpy_include]
     ),
     Extension(
         "anchors",
         ["anchors.pyx"],
-        extra_compile_args={'gcc': ["-Wno-cpp", "-Wno-unused-function"]},
+        extra_compile_args=["/openmp"], ### change 05.10
         include_dirs=[numpy_include]
     ),
     Extension(
         "cpu_nms",
         ["cpu_nms.pyx"],
-        extra_compile_args={'gcc': ["-Wno-cpp", "-Wno-unused-function"]},
+        extra_compile_args=["/openmp"], ### change 05.10
         include_dirs = [numpy_include]
     ),
 ]
@@ -165,5 +175,6 @@ setup(
     name='frcnn_cython',
     ext_modules=ext_modules,
     # inject our custom trigger
-    cmdclass={'build_ext': custom_build_ext},
+    # cmdclass={'build_ext': custom_build_ext}, 
+    cmdclass={'build_ext':build_ext}, ###change 05.10
 )

@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+*.jpg
+RetinaFace/model/R50-0000.params
+RetinaFace/model/R50-symbol.json

@@ -11,7 +11,8 @@ scales = [1024, 1980]
 
 count = 1
 
-gpuid = 0
+# gpuid = 0
+gpuid = -1 ### change 5.10, don't use gpu
 detector = RetinaFace('./model/R50', 0, gpuid, 'net3')
 
 img = cv2.imread('t1.jpg')
