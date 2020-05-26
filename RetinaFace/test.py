@@ -15,7 +15,7 @@ count = 1
 gpuid = -1 ### change 5.10, don't use gpu
 detector = RetinaFace('./model/R50', 0, gpuid, 'net3')
 
-img = cv2.imread('t1.jpg')
+img = cv2.imread('./imgs/t1.jpg')
 print(img.shape)
 im_shape = img.shape
 target_size = scales[0]
@@ -55,7 +55,7 @@ if faces is not None:
           color = (0,255,0)
         cv2.circle(img, (landmark5[l][0], landmark5[l][1]), 1, color, 2)
 
-  filename = './detector_test.jpg'
+  filename = './result/detector_test.jpg'
   print('writing', filename)
   cv2.imwrite(filename, img)
 
